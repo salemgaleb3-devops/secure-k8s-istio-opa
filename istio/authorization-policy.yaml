@@ -1,0 +1,26 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: default-deny
+  namespace: default
+spec:
+  {}
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-frontend-to-recommendation
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: recommendationservice
+  rules:
+  - from:
+    - source:
+        principals:
+        - "cluster.local/ns/default/sa/frontend"
+    to:
+    - operation:
+        ports: ["8080"]
+

@@ -1,0 +1,9 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireAuthorizationPolicy
+metadata:
+  name: require-authz-policy
+spec:
+  parameters:
+    namespaces:
+    - default
+

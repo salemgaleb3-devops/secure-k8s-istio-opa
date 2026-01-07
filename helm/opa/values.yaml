@@ -1,0 +1,47 @@
+replicaCount: 1
+
+# =====================
+# Disable Audit (Project Mode)
+# =====================
+audit:
+  enabled: false
+
+# =====================
+# Controller Resources
+# =====================
+resources:
+  controller:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+
+# =====================
+# Namespaces to Watch
+# =====================
+namespaces:
+  - default
+  - devops-tools
+  - istio-system
+
+# =====================
+# Webhook
+# =====================
+webhook:
+  failurePolicy: Fail
+  timeoutSeconds: 5
+
+# =====================
+# Logging
+# =====================
+log:
+  level: info
+
+# =====================
+# RBAC
+# =====================
+rbac:
+  create: true
+

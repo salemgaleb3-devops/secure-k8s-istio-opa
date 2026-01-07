@@ -1,0 +1,39 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequireauthorizationpolicy
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequireAuthorizationPolicy
+      validation:
+        openAPIV3Schema:
+          properties:
+            namespaces:
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequireauthorizationpolicy
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Deployment"
+          ns := input.review.object.metadata.namespace
+          ns == "default"
+
+          not authorization_policy_exists(ns)
+
+          msg := sprintf(
+            "Deployment in namespace '%s' must have an AuthorizationPolicy",
+            [ns]
+          )
+        }
+
+        authorization_policy_exists(ns) {
+          ap := input.review.context.related["security.istio.io/v1/AuthorizationPolicy"]
+          ap.metadata.namespace == ns
+        }
+

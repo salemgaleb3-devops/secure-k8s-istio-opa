@@ -1,0 +1,66 @@
+# helm/istio/values.yaml
+global:
+  proxy:
+    autoInject: enabled
+    accessLogFile: /dev/stdout
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+  mtls:
+    enabled: true
+  sds:
+    enabled: true
+  controlPlaneSecurityEnabled: true
+
+istiod:
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  nodeSelector: {}
+  tolerations: []
+
+gateways:
+  istio-ingressgateway:
+    enabled: true
+    type: LoadBalancer
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 250m
+        memory: 256Mi
+    nodeSelector: {}
+    tolerations: []
+  istio-egressgateway:
+    enabled: false
+
+pilot:
+  autoscaleEnabled: true
+  autoscaleMin: 1
+  autoscaleMax: 2
+
+sidecarInjectorWebhook:
+  enableNamespacesByDefault: false
+  injectedAnnotations: {}
+
+telemetry:
+  enabled: false 
+
+tracing:
+  enabled: false
+
+policy:
+  enabled: false
+
+mixer:
+  enabled: false
+
