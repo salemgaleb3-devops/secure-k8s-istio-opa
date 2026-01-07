@@ -254,7 +254,7 @@ kubectl apply -f opa/
 
 ## 👤 Author
 
-**Salem Bamakhram** 
+**Salem Bamakhram** \
   DevOps Engineer
 
 
