@@ -254,8 +254,8 @@ kubectl apply -f opa/
 
 ## 👤 Author
 
-**Salem**
-DevOps / Platform Engineer
+**Salem Bamakhram** 
+  DevOps Engineer
 
-This project is designed to demonstrate real‑world Kubernetes security practices suitable for production environments.
+
 
